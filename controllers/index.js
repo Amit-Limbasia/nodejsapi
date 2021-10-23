@@ -2,8 +2,11 @@ const { User } = require("../models");
 
 const getAllUsers = async (req, res) => {
   try {
+    // const users = await User.findAll({
+    //   attributes: [["fname", "First Name"], ["lname", "Last Name"], "email"],
+    // });
     const users = await User.findAll();
-    return res.status(200).json({ users });
+    return res.status(200).json({ sucess: "Data is here!", users });
   } catch (error) {
     return res.status(500).send(error.message);
   }
@@ -14,6 +17,7 @@ const updateUser = async (req, res) => {
     const { id } = req.params;
     const [updated] = await User.update(req.body, {
       where: { id: id },
+      individualHooks: true,
     });
 
     if (updated) {

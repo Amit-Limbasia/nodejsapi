@@ -4,7 +4,11 @@
     "password": null,
     "database": "mutualfund",
     "host": "localhost",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "dialectOptions": {
+      "useUTC": false
+    },
+    "timezone": "+5:30"
   },
   "test": {
     "username": "root",
