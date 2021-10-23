@@ -8,15 +8,15 @@ const auth = require("../middleware/auth");
 
 router.get("/", (req, res) => res.send("This is root!"));
 
-router.get("/users", auth, userdetail);
-
-router.put("/users/:id", controllers.updateUser);
+// router.put("/users/:id", controllers.updateUser);
 
 router.post("/users", createUser);
 
 router.post("/login", dologin);
 
-router.post("/welcome", auth, (req, res) => {
-  res.status(200).send("Welcome 🙌 ");
-});
+router.get("/users", auth, userdetail);
+
+// router.post("/welcome", auth, (req, res) => {
+//   res.status(200).send("Welcome 🙌 ");
+// });
 module.exports = router;

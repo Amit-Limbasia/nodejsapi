@@ -2,7 +2,7 @@ const { User } = require("../models");
 
 const userdetail = async (req, res) => {
   try {
-    console.log(req.user);
+    // console.log(req.user);
     const { user_id } = req.user;
     const userdata = await User.findOne(
       {
