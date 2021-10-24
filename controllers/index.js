@@ -1,10 +1,13 @@
+// this file use for testing purpose only
+// It does not have any function directly use...
+
 const { User } = require("../models");
 
 const getAllUsers = async (req, res) => {
   try {
-    // const users = await User.findAll({
-    //   attributes: [["fname", "First Name"], ["lname", "Last Name"], "email"],
-    // });
+    const users = await User.findAll({
+      attributes: [["fname", "First Name"], ["lname", "Last Name"], "email"],
+    });
     const users = await User.findAll();
     return res.status(200).json({ sucess: "Data is here!", users });
   } catch (error) {

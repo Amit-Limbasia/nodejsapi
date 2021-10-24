@@ -17,7 +17,6 @@ const userdetail = async (req, res) => {
       ],
       where: { id: user_id },
     });
-    // Create token
     return res.status(200).json({ details: userdata });
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -37,6 +36,7 @@ const updateuserdetails = async (req, res) => {
       },
       {
         where: { id: user_id },
+        individualHooks: true, //It required to update time of UpdatedAt
       }
     );
     return res.status(201).json({ message: "Details Updated Successfully!" });

@@ -11,7 +11,7 @@ router.get("/", (req, res) => res.send("This is root!"));
 
 router.post("/usercreate", Validator("createuser"), beforelogin.createUser);
 
-router.post("/login", validator("login"), beforelogin.dologin);
+router.post("/login", Validator("login"), beforelogin.dologin);
 
 router.get("/userdetail", auth, users.userdetail);
 

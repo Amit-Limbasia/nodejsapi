@@ -24,15 +24,14 @@ let allschema = {
     Joi.allow(null),
   ],
 };
+let schemaoption = {
+  abortEarly: false, // include all errors
+};
 
 const login = Joi.object({
   email: allschema.email,
   password: allschema.password,
-}).options({
-  abortEarly: false, // include all errors
-  allowUnknown: false, // ignore unknown props
-  stripUnknown: true, // remove unknown props
-});
+}).options(schemaoption);
 
 const updateuser = Joi.object({
   fname: allschema.fname,
@@ -41,17 +40,7 @@ const updateuser = Joi.object({
   upi_payment_id: allschema.upi_payment_id,
 })
   .min(1)
-  .options({
-    abortEarly: false, // include all errors
-    allowUnknown: false, // ignore unknown props
-    stripUnknown: true, // remove unknown props
-  });
+  .options(schemaoption);
 
-const createuser = Joi.object({
-  allschema,
-}).options({
-  abortEarly: false, // include all errors
-  allowUnknown: false, // ignore unknown props
-  stripUnknown: true, // remove unknown props
-});
+const createuser = Joi.object(allschema).options(schemaoption);
 module.exports = { createuser, updateuser, login };
