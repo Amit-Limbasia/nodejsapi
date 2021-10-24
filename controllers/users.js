@@ -28,7 +28,7 @@ const updateuserdetails = async (req, res) => {
   const { user_id } = req.user;
   const { fname, mname, lname, upi_payment_id } = req.body;
   try {
-    const userdata = await User.update(
+    await User.update(
       {
         fname: fname,
         mname: mname,

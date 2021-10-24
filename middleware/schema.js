@@ -1,19 +1,6 @@
 const Joi = require("joi");
 
-const updateuserschema = Joi.object({
-  fname: Joi.string().min(3).max(10),
-  mname: Joi.string().min(3).max(10),
-  lname: Joi.string().min(3).max(10),
-  upi_payment_status: Joi.string().email(),
-})
-  .min(1)
-  .options({
-    abortEarly: false, // include all errors
-    allowUnknown: false, // ignore unknown props
-    stripUnknown: true, // remove unknown props
-  });
-
-const createuserschema = Joi.object({
+let allschema = {
   fname: Joi.string().min(3).max(10).required(),
   mname: Joi.string().min(3).max(10).required(),
   lname: Joi.string().min(3).max(10).required(),
@@ -36,9 +23,35 @@ const createuserschema = Joi.object({
     Joi.string().allow(null).email().optional(),
     Joi.allow(null),
   ],
+};
+
+const login = Joi.object({
+  email: allschema.email,
+  password: allschema.password,
 }).options({
   abortEarly: false, // include all errors
   allowUnknown: false, // ignore unknown props
   stripUnknown: true, // remove unknown props
 });
-module.exports = { createuserschema, updateuserschema };
+
+const updateuser = Joi.object({
+  fname: allschema.fname,
+  mname: allschema.mname,
+  lname: allschema.lname,
+  upi_payment_id: allschema.upi_payment_id,
+})
+  .min(1)
+  .options({
+    abortEarly: false, // include all errors
+    allowUnknown: false, // ignore unknown props
+    stripUnknown: true, // remove unknown props
+  });
+
+const createuser = Joi.object({
+  allschema,
+}).options({
+  abortEarly: false, // include all errors
+  allowUnknown: false, // ignore unknown props
+  stripUnknown: true, // remove unknown props
+});
+module.exports = { createuser, updateuser, login };
