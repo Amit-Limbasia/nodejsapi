@@ -1,17 +1,30 @@
 const { Router } = require("express");
-const controllers = require("../controllers");
+//const controllers = require("../controllers");
 const beforelogin = require("../controllers/beforelogin");
-const { userdetail } = require("../controllers/users");
+const users = require("../controllers/users");
 const router = Router();
 const auth = require("../middleware/auth");
+const Validator = require("../middleware/validator");
 
+// Routes
 router.get("/", (req, res) => res.send("This is root!"));
 
-router.post("/users", beforelogin.createUser);
+router.post(
+  "/usercreate",
+  Validator("createuserschema"),
+  beforelogin.createUser
+);
 
 router.post("/login", beforelogin.dologin);
 
-router.get("/users", auth, userdetail);
+router.get("/userdetail", auth, users.userdetail);
+
+router.post(
+  "/userupdate",
+  auth,
+  Validator("updateuserschema"),
+  users.updateuserdetails
+);
 
 // router.put("/users/:id", controllers.updateUser);
 
